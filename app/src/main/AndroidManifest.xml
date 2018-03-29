@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.features.home.HomeActivity"
+            android:name=".ui.features.Launcher"
             android:label="@string/app_name">
 
             <intent-filter>

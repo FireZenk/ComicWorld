@@ -5,15 +5,26 @@ import org.firezenk.comicworld.R
 import org.firezenk.comicworld.ui.features.commons.State
 import javax.inject.Inject
 
-class HomeMapper @Inject constructor(private val context: Context) {
+open class HomeStates @Inject constructor(private val context: Context) : State() {
 
-    fun home() = OpenHome(context.getString(R.string.title_home))
-    fun dashboard() = OpenDashboard(context.getString(R.string.title_dashboard))
-    fun notifications() = OpenNotifications(context.getString(R.string.title_notifications))
+    fun home() = OpenHome(context)
+
+    fun dashboard() = OpenDashboard(context)
+
+    fun notifications() = OpenNotifications(context)
+
+    data class OpenHome(private val context: Context) : HomeStates(context) {
+        val message: String
+            get() = context.getString(R.string.title_home)
+    }
+
+    data class OpenDashboard(private val context: Context) : HomeStates(context) {
+        val message: String
+            get() = context.getString(R.string.title_dashboard)
+    }
+
+    data class OpenNotifications(private val context: Context) : HomeStates(context) {
+        val message: String
+            get() = context.getString(R.string.title_notifications)
+    }
 }
-
-sealed class HomeStates : State()
-
-data class OpenHome(val message: String) : HomeStates()
-data class OpenDashboard(val message: String) : HomeStates()
-data class OpenNotifications(val message: String) : HomeStates()

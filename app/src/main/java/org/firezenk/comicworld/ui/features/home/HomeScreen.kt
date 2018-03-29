@@ -1,20 +1,22 @@
 package org.firezenk.comicworld.ui.features.home
 
-import android.os.Bundle
+import android.content.Context
 import android.support.design.widget.BottomNavigationView
-import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_home.*
+import android.widget.RelativeLayout
+import kotlinx.android.synthetic.main.screen_home.view.*
 import org.firezenk.comicworld.ComicWorldApp.Companion.component
 import org.firezenk.comicworld.R
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity(), HomeView {
+class HomeScreen @Inject constructor(context: Context) : RelativeLayout(context), HomeView {
 
     @Inject lateinit var presenter: HomePresenter
+    @Inject lateinit var actions: HomeActions
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+
+        inflate(context, R.layout.screen_home, this)
 
         component inject this
 
@@ -23,12 +25,11 @@ class HomeActivity : AppCompatActivity(), HomeView {
         setupNavigation()
     }
 
-    override fun render(state: HomeStates) {
-        when(state) {
-            is OpenHome -> message.text = state.message
-            is OpenDashboard -> message.text = state.message
-            is OpenNotifications -> message.text = state.message
-        }
+    override fun render(state: HomeStates) = when(state) {
+        is HomeStates.OpenHome -> message.text = state.message
+        is HomeStates.OpenDashboard -> message.text = state.message
+        is HomeStates.OpenNotifications -> message.text = state.message
+        else -> {}
     }
 
     private fun setupNavigation() {
@@ -36,17 +37,14 @@ class HomeActivity : AppCompatActivity(), HomeView {
             when (item.itemId) {
                 R.id.navigation_home -> {
                     presenter reduce GoHome()
-                    message.setText(R.string.title_home)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_dashboard -> {
                     presenter reduce GoDashboard()
-                    message.setText(R.string.title_dashboard)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_notifications -> {
                     presenter reduce GoNotifications()
-                    message.setText(R.string.title_notifications)
                     return@OnNavigationItemSelectedListener true
                 }
             }
