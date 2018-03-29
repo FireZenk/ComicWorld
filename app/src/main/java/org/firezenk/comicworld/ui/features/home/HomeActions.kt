@@ -4,7 +4,7 @@ import org.firezenk.comicworld.domain.usecases.GetCharacters
 import org.firezenk.comicworld.ui.features.commons.Action
 import javax.inject.Inject
 
-open class HomeActions @Inject constructor(private val getCharacters: GetCharacters) : Action() {
+open class HomeActions @Inject constructor(open val getCharacters: GetCharacters) : Action() {
 
     fun home() = GoHome(getCharacters)
 
@@ -12,12 +12,9 @@ open class HomeActions @Inject constructor(private val getCharacters: GetCharact
 
     fun notifications() = GoNotifications(getCharacters)
 
-    class GoHome(private val getCharacters: GetCharacters) : HomeActions(getCharacters) {
+    class GoHome(override val getCharacters: GetCharacters) : HomeActions(getCharacters)
 
-        fun execute() = getCharacters.execute()
-    }
+    class GoDashboard(override val getCharacters: GetCharacters) : HomeActions(getCharacters)
 
-    class GoDashboard(private val getCharacters: GetCharacters) : HomeActions(getCharacters)
-
-    class GoNotifications(private val getCharacters: GetCharacters) : HomeActions(getCharacters)
+    class GoNotifications(override val getCharacters: GetCharacters) : HomeActions(getCharacters)
 }
