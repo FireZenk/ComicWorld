@@ -1,20 +1,19 @@
 package org.firezenk.comicworld.ui.features.home
 
-import org.firezenk.comicworld.domain.usecases.GetCharacters
 import org.firezenk.comicworld.ui.features.commons.Action
 import javax.inject.Inject
 
-open class HomeActions @Inject constructor(open val getCharacters: GetCharacters) : Action() {
+open class HomeActions @Inject constructor() : Action() {
 
-    fun home() = GoHome(getCharacters)
+    fun home() = GoHome()
 
-    fun dashboard() = GoDashboard(getCharacters)
+    fun dashboard() = GoDashboard()
 
-    fun notifications() = GoNotifications(getCharacters)
+    fun notifications() = GoNotifications()
 
-    class GoHome(override val getCharacters: GetCharacters) : HomeActions(getCharacters)
+    class GoHome : HomeActions()
 
-    class GoDashboard(override val getCharacters: GetCharacters) : HomeActions(getCharacters)
+    class GoDashboard : HomeActions()
 
-    class GoNotifications(override val getCharacters: GetCharacters) : HomeActions(getCharacters)
+    class GoNotifications : HomeActions()
 }

@@ -25,11 +25,8 @@ class HomeScreen @Inject constructor(context: Context) : RelativeLayout(context)
         setupNavigation()
     }
 
-    override fun render(state: HomeStates) = when(state) {
-        is HomeStates.OpenHome -> message.text = state.list.first().name
-        is HomeStates.OpenDashboard -> message.text = state.message
-        is HomeStates.OpenNotifications -> message.text = state.message
-        else -> {}
+    override fun render(state: HomeStates) {
+        // TODO render anything right now
     }
 
     private fun setupNavigation() {
