@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import kotlinx.android.synthetic.main.screen_characters_item.view.*
 import org.firezenk.comicworld.R
 import org.firezenk.comicworld.domain.models.CharacterModel
+import org.firezenk.comicworld.ui.extensions.GlideApp
 
 class CharacterItem constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : ConstraintLayout(context, attrs, defStyleAttr) {
@@ -17,6 +18,9 @@ class CharacterItem constructor(context: Context, attrs: AttributeSet? = null, d
         inflate(context, R.layout.screen_characters_item, this)
 
         name.text = model.name
+        description.text = model.description
+
+        GlideApp.with(this).load(model.avatarUrl).into(avatar);
     }
 
     fun bind(model: CharacterModel) {
