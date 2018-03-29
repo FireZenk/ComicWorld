@@ -36,15 +36,15 @@ class HomeScreen @Inject constructor(context: Context) : RelativeLayout(context)
         navigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    presenter reduce GoHome()
+                    presenter reduce actions.home()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_dashboard -> {
-                    presenter reduce GoDashboard()
+                    presenter reduce actions.dashboard()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_notifications -> {
-                    presenter reduce GoNotifications()
+                    presenter reduce actions.notifications()
                     return@OnNavigationItemSelectedListener true
                 }
             }

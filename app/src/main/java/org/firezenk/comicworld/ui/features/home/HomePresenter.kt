@@ -9,9 +9,9 @@ class HomePresenter @Inject constructor(router: Kartographer, private val states
 
     override fun reduce(action: HomeActions) {
         when(action) {
-            is GoHome -> render(states.home())
-            is GoDashboard -> render(states.dashboard())
-            is GoNotifications -> render(states.notifications())
+            is HomeActions.GoHome -> render(states.home())
+            is HomeActions.GoDashboard -> render(states.dashboard())
+            is HomeActions.GoNotifications -> render(states.notifications())
         }
     }
 }
