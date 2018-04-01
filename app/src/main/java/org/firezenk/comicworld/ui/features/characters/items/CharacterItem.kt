@@ -14,6 +14,7 @@ class CharacterItem constructor(context: Context, attrs: AttributeSet? = null, d
     : ConstraintLayout(context, attrs, defStyleAttr), BindableView<CharacterModel> {
 
     private lateinit var model: CharacterModel
+    private lateinit var clickAction: (String) -> Unit
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
@@ -26,9 +27,15 @@ class CharacterItem constructor(context: Context, attrs: AttributeSet? = null, d
             url = model.avatarUrl
             strategy = DiskCacheStrategy.ALL
         }
+
+        setOnClickListener { clickAction(model.id) }
     }
 
     override fun bind(model: CharacterModel) {
         this.model = model
+    }
+
+    fun click(block: (String) -> Unit) {
+        this.clickAction = block
     }
 }

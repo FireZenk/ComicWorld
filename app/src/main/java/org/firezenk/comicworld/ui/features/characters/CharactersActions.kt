@@ -8,5 +8,9 @@ open class CharactersActions @Inject constructor(open val getCharacters: GetChar
 
     fun loadCharacters() = LoadCharacters(getCharacters)
 
+    fun openCharacter(id: String) = OpenCharacter(getCharacters, id)
+
     class LoadCharacters(override val getCharacters: GetCharacters) : CharactersActions(getCharacters)
+
+    class OpenCharacter(override val getCharacters: GetCharacters, val id: String) : CharactersActions(getCharacters)
 }

@@ -2,6 +2,7 @@ package org.firezenk.comicworld.ui.features.characters
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.screen_characters.view.*
 import org.firezenk.comicworld.ComicWorldApp.Companion.component
@@ -9,6 +10,7 @@ import org.firezenk.comicworld.R
 import org.firezenk.comicworld.domain.models.CharacterModel
 import org.firezenk.comicworld.ui.extensions.DSLAdapter
 import org.firezenk.comicworld.ui.extensions.adapterDSL
+import org.firezenk.comicworld.ui.features.characters.di.CharactersModule
 import org.firezenk.comicworld.ui.features.characters.items.CharacterItem
 import org.firezenk.kartographer.annotations.RoutableView
 import javax.inject.Inject
@@ -23,7 +25,9 @@ class CharactersScreen @JvmOverloads constructor(context: Context, attrs: Attrib
     private val adapter: DSLAdapter<CharacterModel> by lazy {
         adapterDSL<CharacterModel> {
             itemView = {
-                CharacterItem(it)
+                CharacterItem(it).apply {
+                    click { id -> actions.openCharacter(id) }
+                }
             }
             comparator = compareBy {
                 it.id
@@ -36,7 +40,7 @@ class CharactersScreen @JvmOverloads constructor(context: Context, attrs: Attrib
 
         inflate(context, R.layout.screen_characters, this)
 
-        component inject this
+        component add CharactersModule(this.parent as ViewGroup) inject this
 
         presenter init this
 
