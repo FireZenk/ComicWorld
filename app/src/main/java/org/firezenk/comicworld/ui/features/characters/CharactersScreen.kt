@@ -23,6 +23,9 @@ class CharactersScreen @JvmOverloads constructor(context: Context, attrs: Attrib
             itemView = {
                 CharacterItem(context)
             }
+            comparator = compareBy {
+                it.id
+            }
         }
     }
 

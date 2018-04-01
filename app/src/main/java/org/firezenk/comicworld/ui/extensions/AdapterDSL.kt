@@ -11,8 +11,9 @@ annotation class AdapterDSL
 class AdapterBuilder<M> {
 
     lateinit var itemView: () -> BindableView<M>
+    lateinit var comparator: Comparator<M>
 
-    fun build(): DSLAdapter<M> = DSLAdapter<M>(itemView)
+    fun build(): DSLAdapter<M> = DSLAdapter<M>(itemView, comparator)
 }
 
 @AdapterDSL
@@ -21,9 +22,10 @@ fun <M> adapterDSL(setup: AdapterBuilder<M>.() -> Unit): DSLAdapter<M> = with(Ad
     build()
 }
 
-class DSLAdapter<M>(private val itemView: () -> BindableView<M>) : RecyclerView.Adapter<DSLAdapter.ViewHolder<M>>() {
+class DSLAdapter<M>(private val itemView: () -> BindableView<M>, private val comparator: Comparator<M>)
+    : RecyclerView.Adapter<DSLAdapter.ViewHolder<M>>() {
 
-    private lateinit var collection: List<M>
+    private lateinit var collection: MutableList<M>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<M> {
         val rootView = itemView()
@@ -39,9 +41,12 @@ class DSLAdapter<M>(private val itemView: () -> BindableView<M>) : RecyclerView.
         holder.bind(collection[position])
     }
 
-    fun addAll(collection: List<M>) {
-        this.collection = collection
-        notifyDataSetChanged()
+    fun addAll(newCollection: List<M>) {
+        diffDSL<M> {
+            oldList = collection
+            newList = newCollection
+            comparable = comparator
+        }
     }
 
     class ViewHolder<in M>(private val item: BindableView<M>) : RecyclerView.ViewHolder(item as View) {
