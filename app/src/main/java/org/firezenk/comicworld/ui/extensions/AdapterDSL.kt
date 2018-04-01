@@ -25,7 +25,7 @@ fun <M> adapterDSL(setup: AdapterBuilder<M>.() -> Unit): DSLAdapter<M> = with(Ad
 class DSLAdapter<M>(private val itemView: () -> BindableView<M>, private val comparator: Comparator<M>)
     : RecyclerView.Adapter<DSLAdapter.ViewHolder<M>>() {
 
-    private lateinit var collection: MutableList<M>
+    private val collection: MutableList<M> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<M> {
         val rootView = itemView()
