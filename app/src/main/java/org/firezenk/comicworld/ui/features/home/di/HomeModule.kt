@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import org.firezenk.comicworld.di.modules.ScreenModule
 import org.firezenk.comicworld.ui.features.characters.CharactersScreenRoute
+import org.firezenk.comicworld.ui.features.comics.ComicsScreenRoute
 import org.firezenk.kartographer.library.dsl.route
 import org.firezenk.kartographer.library.types.Path
 import org.firezenk.kartographer.library.types.Route
@@ -24,6 +25,14 @@ class HomeModule(private val container: ViewGroup) : ScreenModule() {
     fun provideCharactersRoute(): Route = route {
         target = CharactersScreenRoute()
         path = Path(CHARACTERS_ROUTE)
+        anchor = container
+    }
+
+    @Provides
+    @Named(COMICS_ROUTE)
+    fun provideComicsRoute(): Route = route {
+        target = ComicsScreenRoute()
+        path = Path(COMICS_ROUTE)
         anchor = container
     }
 }

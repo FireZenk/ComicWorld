@@ -10,7 +10,7 @@ class Launcher : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ComicWorldApp.component inject this
+        ComicWorldApp.component add this
 
         setContentView(HomeScreen(this))
     }
