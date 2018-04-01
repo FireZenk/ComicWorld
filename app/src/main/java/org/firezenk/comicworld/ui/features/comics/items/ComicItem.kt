@@ -16,7 +16,7 @@ class ComicItem constructor(context: Context, attrs: AttributeSet? = null, defSt
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        inflate(context, R.layout.screen_characters_item, this)
+        inflate(context, R.layout.screen_comics_item, this)
 
         name.text = model.title
         description.text = model.description

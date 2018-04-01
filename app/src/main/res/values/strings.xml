@@ -3,4 +3,5 @@
     <string name="title_home">Characters</string>
     <string name="title_dashboard">Comics</string>
     <string name="title_notifications">Series</string>
+    <string name="no_description">No description\navailable</string>
 </resources>

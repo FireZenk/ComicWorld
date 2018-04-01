@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 class CharactersRepository @Inject constructor(private val api: CharacterApiClient) {
 
-    fun characters(limit: Int = 20) = api.getAll(0, limit).response.characters
+    fun characters(offset: Int = 100, limit: Int = 40) = api.getAll(offset, limit).response.characters
             .map { CharacterModel(it.id, it.name, it.description, it.thumbnail.getImageUrl(MarvelImage.Size.DETAIL)) }
 }

@@ -4,14 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="?listPreferredItemHeight"
     android:background="?attr/selectableItemBackground"
     tools:parentTag="android.support.constraint.ConstraintLayout">
 
     <ImageView
         android:id="@+id/avatar"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.072"
@@ -21,31 +24,31 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="8dp"
         app:layout_constraintVertical_bias="0.0"
         tools:src="@tools:sample/avatars"/>
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@android:drawable/screen_background_dark_transparent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/name"
         style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:lines="1"
         android:maxLines="1"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/description"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/avatar"
+        app:layout_constraintStart_toEndOf="@+id/avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="16dp"
+        tools:layout_conversion_absoluteWidth="63dp"
+        tools:layout_conversion_absoluteX="69dp"
+        tools:layout_conversion_absoluteY="16dp"
         tools:text="@tools:sample/full_names"/>
 
     <TextView
@@ -54,15 +57,28 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
         android:ellipsize="end"
         android:lines="2"
         android:maxLines="2"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/name"
+        app:layout_constraintRight_toRightOf="@+id/name"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:layout_conversion_absoluteHeight="14dp"
+        tools:layout_conversion_absoluteWidth="61dp"
+        tools:layout_conversion_absoluteX="69dp"
+        tools:layout_conversion_absoluteY="33dp"
         tools:text="Description"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="32dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="32dp"/>
 
 </merge>

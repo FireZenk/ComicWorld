@@ -34,7 +34,7 @@ class ComicsScreen @JvmOverloads constructor(context: Context, attrs: AttributeS
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
-        inflate(context, R.layout.screen_characters, this)
+        inflate(context, R.layout.screen_comics, this)
 
         component inject this
 
