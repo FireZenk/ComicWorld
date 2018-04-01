@@ -10,8 +10,10 @@ import org.firezenk.comicworld.domain.models.CharacterModel
 import org.firezenk.comicworld.ui.extensions.DSLAdapter
 import org.firezenk.comicworld.ui.extensions.adapterDSL
 import org.firezenk.comicworld.ui.features.characters.items.CharacterItem
+import org.firezenk.kartographer.annotations.RoutableView
 import javax.inject.Inject
 
+@RoutableView
 class CharactersScreen @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : FrameLayout(context, attrs, defStyleAttr), CharactersView {
 
@@ -40,7 +42,7 @@ class CharactersScreen @JvmOverloads constructor(context: Context, attrs: Attrib
 
         list.adapter = adapter
 
-        presenter reduce actions.getCharacters()
+        presenter reduce actions.loadCharacters()
     }
 
     override fun render(state: CharactersStates) = when(state) {

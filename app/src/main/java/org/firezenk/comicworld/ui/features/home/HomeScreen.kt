@@ -6,6 +6,7 @@ import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.screen_home.view.*
 import org.firezenk.comicworld.ComicWorldApp.Companion.component
 import org.firezenk.comicworld.R
+import org.firezenk.comicworld.ui.features.home.di.HomeModule
 import javax.inject.Inject
 
 class HomeScreen @Inject constructor(context: Context) : RelativeLayout(context), HomeView {
@@ -18,11 +19,13 @@ class HomeScreen @Inject constructor(context: Context) : RelativeLayout(context)
 
         inflate(context, R.layout.screen_home, this)
 
-        component inject this
+        component add HomeModule(content) inject this
 
         presenter init this
 
-        setupNavigation()
+        setupNavigation().also {
+            navigation.selectedItemId = R.id.navigation_home
+        }
     }
 
     override fun render(state: HomeStates) {

@@ -9,7 +9,7 @@ class CharactersPresenter @Inject constructor(router: Kartographer, private val 
     : Presenter<CharactersActions, CharactersStates, CharactersView>(router) {
 
     override fun reduce(action: CharactersActions) = when(action) {
-        is CharactersActions.OpenCharacter -> runBlocking {
+        is CharactersActions.LoadCharacters -> runBlocking {
             val heroes = action.getCharacters.execute()
             render(states.success(heroes.await()))
         }

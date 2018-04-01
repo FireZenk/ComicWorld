@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 open class CharactersActions @Inject constructor(open val getCharacters: GetCharacters) : Action() {
 
-    fun getCharacters() = OpenCharacter(getCharacters)
+    fun loadCharacters() = LoadCharacters(getCharacters)
 
-    class OpenCharacter(override val getCharacters: GetCharacters) : CharactersActions(getCharacters)
+    class LoadCharacters(override val getCharacters: GetCharacters) : CharactersActions(getCharacters)
 }

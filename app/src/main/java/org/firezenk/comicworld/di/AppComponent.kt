@@ -6,7 +6,8 @@ import org.firezenk.comicworld.di.modules.AppModule
 import org.firezenk.comicworld.di.modules.NetworkModule
 import org.firezenk.comicworld.ui.features.Launcher
 import org.firezenk.comicworld.ui.features.characters.CharactersScreen
-import org.firezenk.comicworld.ui.features.home.HomeScreen
+import org.firezenk.comicworld.ui.features.home.di.HomeComponent
+import org.firezenk.comicworld.ui.features.home.di.HomeModule
 import javax.inject.Singleton
 
 @Singleton
@@ -16,6 +17,7 @@ interface AppComponent {
     infix fun inject(app: ComicWorldApp)
     infix fun inject(launcher: Launcher)
 
-    infix fun inject(homeScreen: HomeScreen)
+    infix fun add(homeModule: HomeModule): HomeComponent
+
     infix fun inject(charactersScreen: CharactersScreen)
 }
