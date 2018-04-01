@@ -6,10 +6,11 @@ import android.util.AttributeSet
 import kotlinx.android.synthetic.main.screen_characters_item.view.*
 import org.firezenk.comicworld.R
 import org.firezenk.comicworld.domain.models.CharacterModel
+import org.firezenk.comicworld.ui.extensions.BindableView
 import org.firezenk.comicworld.ui.extensions.GlideApp
 
 class CharacterItem constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : ConstraintLayout(context, attrs, defStyleAttr) {
+    : ConstraintLayout(context, attrs, defStyleAttr), BindableView<CharacterModel> {
 
     private lateinit var model: CharacterModel
 
@@ -23,7 +24,7 @@ class CharacterItem constructor(context: Context, attrs: AttributeSet? = null, d
         GlideApp.with(this).load(model.avatarUrl).into(avatar);
     }
 
-    fun bind(model: CharacterModel) {
+    override fun bind(model: CharacterModel) {
         this.model = model
     }
 }

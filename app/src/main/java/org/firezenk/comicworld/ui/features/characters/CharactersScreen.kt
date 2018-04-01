@@ -6,6 +6,10 @@ import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.screen_characters.view.*
 import org.firezenk.comicworld.ComicWorldApp.Companion.component
 import org.firezenk.comicworld.R
+import org.firezenk.comicworld.domain.models.CharacterModel
+import org.firezenk.comicworld.ui.extensions.DSLAdapter
+import org.firezenk.comicworld.ui.extensions.adapterDSL
+import org.firezenk.comicworld.ui.features.characters.items.CharacterItem
 import javax.inject.Inject
 
 class CharactersScreen @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
@@ -14,7 +18,13 @@ class CharactersScreen @JvmOverloads constructor(context: Context, attrs: Attrib
     @Inject lateinit var presenter: CharactersPresenter
     @Inject lateinit var actions: CharactersActions
 
-    private val adapter: CharactersAdapter = CharactersAdapter()
+    private val adapter: DSLAdapter<CharacterModel> by lazy {
+        adapterDSL<CharacterModel> {
+            itemView = {
+                CharacterItem(context)
+            }
+        }
+    }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
