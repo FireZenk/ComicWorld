@@ -23,7 +23,7 @@ class ComicsScreen @JvmOverloads constructor(context: Context, attrs: AttributeS
     private val adapter: DSLAdapter<ComicModel> by lazy {
         adapterDSL<ComicModel> {
             itemView = {
-                ComicItem(context)
+                ComicItem(it)
             }
             comparator = compareBy {
                 it.id

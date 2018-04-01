@@ -1,5 +1,6 @@
 package org.firezenk.comicworld.ui.extensions
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ annotation class AdapterDSL
 @AdapterDSL
 class AdapterBuilder<M> {
 
-    lateinit var itemView: () -> BindableView<M>
+    lateinit var itemView: (Context) -> BindableView<M>
     lateinit var comparator: Comparator<M>
 
     fun build(): DSLAdapter<M> = DSLAdapter<M>(itemView, comparator)
@@ -22,13 +23,13 @@ fun <M> adapterDSL(setup: AdapterBuilder<M>.() -> Unit): DSLAdapter<M> = with(Ad
     build()
 }
 
-class DSLAdapter<M>(private val itemView: () -> BindableView<M>, private val comparator: Comparator<M>)
+class DSLAdapter<M>(private val itemView: (Context) -> BindableView<M>, private val comparator: Comparator<M>)
     : RecyclerView.Adapter<DSLAdapter.ViewHolder<M>>() {
 
     private val collection: MutableList<M> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<M> {
-        val rootView = itemView()
+        val rootView = itemView(parent.context)
         val layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
         (rootView as View).layoutParams = layoutParams
