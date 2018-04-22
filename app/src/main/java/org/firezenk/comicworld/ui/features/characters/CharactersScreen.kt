@@ -30,7 +30,7 @@ class CharactersScreen @JvmOverloads constructor(context: Context, attrs: Attrib
         adapterDSL<CharacterModel> {
             itemView = {
                 CharacterItem(it).apply {
-                    click { id -> actions.openCharacter(id) }
+                    click { id -> presenter reduce actions.openCharacter(id) }
                 }
             }
             comparator = compareBy {
