@@ -35,14 +35,18 @@ class BackBuilder {
 class ToolbarBuilder {
 
     lateinit var toolbar: Toolbar
+    lateinit var title: Any
     var back: BackBuilder? = null
-    var title: Int = 0
     var menu: Int = 0
     var items = mutableListOf<Pair<Int, () -> Unit>>()
 
     fun build(): Toolbar {
         if (title != 0) {
-            toolbar.title = toolbar.resources.getString(title)
+            toolbar.title = when(title) {
+                is Int -> toolbar.resources.getString(title as Int)
+                is String -> title as String
+                else -> {toolbar.resources.getString(R.string.app_name) }
+            }
         }
 
         if (menu != 0) {

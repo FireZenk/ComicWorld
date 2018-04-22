@@ -41,7 +41,21 @@ class CharacterScreen @JvmOverloads constructor(context: Context, attrs: Attribu
         }
     }
 
-    override fun render(state: CharacterStates) {
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onStart() {
+        presenter.run {
+            this init this@CharacterScreen
+            this reduce actions.loadCharacter()
+        }
+    }
 
+    override fun render(state: CharacterStates) {
+        when(state) {
+            is CharacterStates.Loaded -> {
+                toolbar.dsl {
+                    title = state.name
+                }
+            }
+        }
     }
 }
