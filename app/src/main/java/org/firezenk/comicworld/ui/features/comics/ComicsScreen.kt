@@ -39,18 +39,16 @@ class ComicsScreen @JvmOverloads constructor(context: Context, attrs: AttributeS
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        inflate(context, R.layout.screen_comics, this)
+
         component add ComicsModule(this.parent as ViewGroup) inject this
 
         lifecycle.addObserver(this)
-    }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun onCreate() {
-        inflate(context, R.layout.screen_comics, this)
         list.adapter = adapter
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onStart() {
         presenter.run {
             this init this@ComicsScreen

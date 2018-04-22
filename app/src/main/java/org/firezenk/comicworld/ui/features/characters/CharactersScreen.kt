@@ -41,14 +41,13 @@ class CharactersScreen @JvmOverloads constructor(context: Context, attrs: Attrib
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+
+        inflate(context, R.layout.screen_characters, this)
+
         component add CharactersModule(this.parent as ViewGroup) inject this
 
         lifecycle.addObserver(this)
-    }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun onCreate() {
-        inflate(context, R.layout.screen_characters, this)
         list.adapter = adapter
     }
 

@@ -26,14 +26,13 @@ class CharacterScreen @JvmOverloads constructor(context: Context, attrs: Attribu
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+
+        inflate(context, R.layout.screen_character, this)
+
         component add CharacterModule(parent as ViewGroup) inject this
 
         lifecycle.addObserver(this)
-    }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun onCreate() {
-        inflate(context, R.layout.screen_character, this)
         toolbar.dsl {
             back {
                 action = { presenter reduce actions.back { (context as Activity).onBackPressed() } }

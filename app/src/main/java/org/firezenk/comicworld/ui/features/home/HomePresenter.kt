@@ -19,7 +19,6 @@ class HomePresenter @Inject constructor(router: Kartographer,
             is HomeActions.GoHome -> router.next(charactersRoute)
             is HomeActions.GoDashboard -> router.next(comicsRoute)
             is HomeActions.GoNotifications -> render(states.notifications())
-            else -> super.reduce(action)
         }
     }
 }

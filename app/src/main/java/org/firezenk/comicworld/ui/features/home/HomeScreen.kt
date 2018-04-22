@@ -1,5 +1,8 @@
 package org.firezenk.comicworld.ui.features.home
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Context
 import android.support.design.widget.BottomNavigationView
 import android.widget.RelativeLayout
@@ -9,8 +12,9 @@ import org.firezenk.comicworld.R
 import org.firezenk.comicworld.ui.features.home.di.HomeModule
 import javax.inject.Inject
 
-class HomeScreen @Inject constructor(context: Context) : RelativeLayout(context), HomeView {
+class HomeScreen @Inject constructor(context: Context) : RelativeLayout(context), HomeView, LifecycleObserver {
 
+    @Inject lateinit var lifecycle: Lifecycle
     @Inject lateinit var presenter: HomePresenter
     @Inject lateinit var actions: HomeActions
 
@@ -21,12 +25,15 @@ class HomeScreen @Inject constructor(context: Context) : RelativeLayout(context)
 
         component add HomeModule(content) inject this
 
-        presenter init this
+        lifecycle.addObserver(this)
 
         setupNavigation().also {
             navigation.selectedItemId = R.id.navigation_home
         }
     }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onStart() = presenter init this
 
     override fun render(state: HomeStates) {
         // TODO render anything right now

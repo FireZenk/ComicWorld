@@ -16,7 +16,6 @@ class ComicsPresenter @Inject constructor(router: Kartographer, private val stat
                     render(states.success(this))
                 }
             }
-            else -> super.reduce(action)
         }
     }
 }
