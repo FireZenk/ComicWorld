@@ -14,14 +14,14 @@ import javax.inject.Named
 class CharactersModule(private val container: ViewGroup) : ScreenModule(container) {
 
     companion object {
-        const val CHARACTER_ROUTE = "characters"
+        const val CHARACTERS_ROUTE = "characters"
     }
 
     @Provides
-    @Named(CHARACTER_ROUTE)
+    @Named(CHARACTERS_ROUTE)
     fun provideCharactersRoute(): ViewRoute = route {
         target = CharacterScreenRoute()
-        path = Path(CHARACTER_ROUTE)
+        path = Path(CHARACTERS_ROUTE)
         anchor = container
     }
 }
