@@ -1,5 +1,6 @@
 package org.firezenk.comicworld.ui.features.character
 
+import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
@@ -35,7 +36,7 @@ class CharacterScreen @JvmOverloads constructor(context: Context, attrs: Attribu
         inflate(context, R.layout.screen_character, this)
         toolbar.dsl {
             back {
-                action = { presenter reduce actions.back() }
+                action = { presenter reduce actions.back { (context as Activity).onBackPressed() } }
             }
         }
     }

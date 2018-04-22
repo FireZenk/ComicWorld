@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 open class CharacterActions @Inject constructor() : Action() {
 
-    fun back() = Back()
+    fun back(block: () -> Unit) = Back(block)
 
-    class Back : CharacterActions()
+    class Back(val block: () -> Unit) : CharacterActions()
 }

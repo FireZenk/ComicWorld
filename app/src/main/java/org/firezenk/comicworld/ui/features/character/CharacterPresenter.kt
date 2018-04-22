@@ -8,6 +8,8 @@ class CharacterPresenter @Inject constructor(router: Kartographer, private val s
     : Presenter<CharacterActions, CharacterStates, CharacterView>(router) {
 
     override fun reduce(action: CharacterActions) {
-        super.reduce(action)
+        when (action) {
+            is CharacterActions.Back -> router.backOnPath { action.block }
+        }
     }
 }

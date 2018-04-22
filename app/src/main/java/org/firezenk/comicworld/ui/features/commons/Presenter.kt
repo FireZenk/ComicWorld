@@ -10,10 +10,7 @@ abstract class Presenter<in A : Action, in S : State, in V : View<S>>(internal v
         this.view = view
     }
 
-    @Suppress("IMPLICIT_CAST_TO_ANY", "UNUSED_EXPRESSION")
-    open infix fun reduce(action: A) = onLoad()
-
-    protected open fun onLoad() {}
+    abstract infix fun reduce(action: A)
 
     infix fun render(state: S) = view.render(state)
 }
