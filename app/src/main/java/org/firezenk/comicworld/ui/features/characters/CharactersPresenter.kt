@@ -1,6 +1,7 @@
 package org.firezenk.comicworld.ui.features.characters
 
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
 import org.firezenk.comicworld.ui.features.characters.di.CharactersModule.Companion.CHARACTER_ROUTE
 import org.firezenk.comicworld.ui.features.commons.Presenter
 import org.firezenk.kartographer.library.Kartographer
@@ -15,9 +16,10 @@ class CharactersPresenter @Inject constructor(router: Kartographer,
 
     override fun reduce(action: CharactersActions) {
         when(action) {
-            is CharactersActions.LoadCharacters -> runBlocking {
-                val heroes = action.getCharacters.execute()
-                render(states.success(heroes.await()))
+            is CharactersActions.LoadCharacters -> launch(UI) {
+                action.getCharacters.execute().run {
+                    render(states.success(this))
+                }
             }
             is CharactersActions.OpenCharacter -> {
                 router.next(characterRoute, mapOf("id" to action.id))

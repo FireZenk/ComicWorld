@@ -12,7 +12,7 @@ import org.firezenk.kartographer.library.types.Route
 import javax.inject.Named
 
 @Module
-class HomeModule(private val container: ViewGroup) : ScreenModule() {
+class HomeModule(private val container: ViewGroup) : ScreenModule(container) {
 
     companion object {
         const val CHARACTERS_ROUTE = "characters"

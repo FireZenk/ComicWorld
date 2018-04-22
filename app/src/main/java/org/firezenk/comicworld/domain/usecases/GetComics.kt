@@ -9,5 +9,5 @@ class GetComics @Inject constructor(private val comicsRepository: ComicsReposito
 
     suspend fun execute() = async(CommonPool) {
         comicsRepository.comics()
-    }
+    }.await()
 }

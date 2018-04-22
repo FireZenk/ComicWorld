@@ -9,5 +9,5 @@ class GetCharacters @Inject constructor(private val charactersRepository: Charac
 
     suspend fun execute() = async(CommonPool) {
         charactersRepository.characters()
-    }
+    }.await()
 }

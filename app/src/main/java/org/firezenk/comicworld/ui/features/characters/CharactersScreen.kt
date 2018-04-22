@@ -1,5 +1,8 @@
 package org.firezenk.comicworld.ui.features.characters
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
@@ -17,8 +20,9 @@ import javax.inject.Inject
 
 @RoutableView
 class CharactersScreen @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : FrameLayout(context, attrs, defStyleAttr), CharactersView {
+    : FrameLayout(context, attrs, defStyleAttr), CharactersView, LifecycleObserver {
 
+    @Inject lateinit var lifecycle: Lifecycle
     @Inject lateinit var presenter: CharactersPresenter
     @Inject lateinit var actions: CharactersActions
 
@@ -37,16 +41,23 @@ class CharactersScreen @JvmOverloads constructor(context: Context, attrs: Attrib
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-
-        inflate(context, R.layout.screen_characters, this)
-
         component add CharactersModule(this.parent as ViewGroup) inject this
 
-        presenter init this
+        lifecycle.addObserver(this)
+    }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun onCreate() {
+        inflate(context, R.layout.screen_characters, this)
         list.adapter = adapter
+    }
 
-        presenter reduce actions.loadCharacters()
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onStart() {
+        presenter.run {
+            this init this@CharactersScreen
+            this reduce actions.loadCharacters()
+        }
     }
 
     override fun render(state: CharactersStates) = when(state) {
