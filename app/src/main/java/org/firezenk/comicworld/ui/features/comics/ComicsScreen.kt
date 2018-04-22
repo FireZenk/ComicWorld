@@ -6,7 +6,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.screen_characters.view.*
 import org.firezenk.comicworld.ComicWorldApp.Companion.component
 import org.firezenk.comicworld.R
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @RoutableView
 class ComicsScreen @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : FrameLayout(context, attrs, defStyleAttr), ComicsView, LifecycleObserver {
+    : LinearLayout(context, attrs, defStyleAttr), ComicsView, LifecycleObserver {
 
     @Inject lateinit var lifecycle: Lifecycle
     @Inject lateinit var presenter: ComicsPresenter
