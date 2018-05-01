@@ -2,16 +2,29 @@ package org.firezenk.comicworld.ui.features
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import org.firezenk.comicworld.ComicWorldApp.Companion.component
-import org.firezenk.comicworld.ui.features.home.HomeScreen
+import kotlinx.android.synthetic.main.launcher.*
+import org.firezenk.comicworld.ComicWorldApp
+import org.firezenk.comicworld.R
+import org.firezenk.comicworld.ui.features.home.HomeScreenRoute
+import org.firezenk.kartographer.library.Kartographer
+import org.firezenk.kartographer.library.dsl.route
+import javax.inject.Inject
 
 class Launcher : AppCompatActivity() {
 
+    @Inject lateinit var router: Kartographer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.launcher)
 
-        component add this
+        ComicWorldApp.component add this
 
-        setContentView(HomeScreen(this))
+        application as ComicWorldApp registerLauncher this
+
+        router.next(route {
+            target = HomeScreenRoute()
+            anchor = container
+        })
     }
 }

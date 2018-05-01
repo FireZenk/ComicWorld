@@ -24,6 +24,9 @@ class CharactersPresenter @Inject constructor(router: Kartographer,
             is CharactersActions.OpenCharacter -> {
                 router.next(characterRoute, mapOf("id" to action.id))
             }
+            is CharactersActions.Back -> {
+                action.block()
+            }
         }
     }
 }

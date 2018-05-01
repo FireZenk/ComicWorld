@@ -1,5 +1,6 @@
 package org.firezenk.comicworld
 
+import android.app.Activity
 import android.app.Application
 import org.firezenk.comicworld.di.AppComponent
 import org.firezenk.comicworld.di.DaggerAppComponent
@@ -12,6 +13,8 @@ class ComicWorldApp : Application() {
         lateinit var component: AppComponent
     }
 
+    private lateinit var act: Activity
+
     override fun onCreate() {
         super.onCreate()
 
@@ -21,4 +24,10 @@ class ComicWorldApp : Application() {
                 .build()
         component inject this
     }
+
+    infix fun registerLauncher(activity: Activity) {
+        act = activity
+    }
+
+    fun currentLauncher(): Activity = act
 }

@@ -3,6 +3,7 @@
     <string name="title_home">Characters</string>
     <string name="title_dashboard">Comics</string>
     <string name="title_notifications">Series</string>
+    <string name="toast_home_clicked">Home clicked!</string>
     <string name="no_description">No description\navailable</string>
     <string name="menu_refresh">Refresh</string>
     <string name="menu_exit">Exit</string>

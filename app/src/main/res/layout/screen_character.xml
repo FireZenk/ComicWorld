@@ -6,6 +6,8 @@
        android:orientation="vertical"
        tools:parentTag="android.widget.LinearLayout">
 
+    <include layout="@layout/include_toolbar"/>
+
     <!-- TODO Draw character -->
 
 </merge>

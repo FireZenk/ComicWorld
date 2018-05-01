@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:parentTag="android.widget.LinearLayout">
 
+    <include layout="@layout/include_toolbar"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"

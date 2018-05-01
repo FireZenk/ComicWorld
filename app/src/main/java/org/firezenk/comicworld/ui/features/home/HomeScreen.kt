@@ -1,27 +1,37 @@
 package org.firezenk.comicworld.ui.features.home
 
+import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Context
 import android.support.design.widget.BottomNavigationView
+import android.util.AttributeSet
 import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.screen_home.view.*
+import org.firezenk.comicworld.ComicWorldApp
 import org.firezenk.comicworld.ComicWorldApp.Companion.component
 import org.firezenk.comicworld.R
 import org.firezenk.comicworld.ui.features.home.di.HomeModule
+import org.firezenk.kartographer.annotations.RoutableView
 import javax.inject.Inject
 
-class HomeScreen @Inject constructor(context: Context) : RelativeLayout(context), HomeView, LifecycleObserver {
+@RoutableView
+class HomeScreen @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : RelativeLayout(context, attrs, defStyleAttr), HomeView, LifecycleObserver {
 
     @Inject lateinit var lifecycle: Lifecycle
     @Inject lateinit var presenter: HomePresenter
     @Inject lateinit var actions: HomeActions
 
+    private val act: Activity by lazy {
+        (context as ComicWorldApp).currentLauncher()
+    }
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
-        inflate(context, R.layout.screen_home, this)
+        inflate(act, R.layout.screen_home, this)
 
         component add HomeModule(content) inject this
 

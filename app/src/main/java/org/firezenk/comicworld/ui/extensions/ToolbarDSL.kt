@@ -30,7 +30,6 @@ class BackBuilder {
     }
 }
 
-
 @ToolbarDsl
 class ToolbarBuilder {
 
@@ -41,7 +40,7 @@ class ToolbarBuilder {
     var items = mutableListOf<Pair<Int, () -> Unit>>()
 
     fun build(): Toolbar {
-        if (title != 0) {
+        if (::title.isInitialized && title != 0) {
             toolbar.title = when(title) {
                 is Int -> toolbar.resources.getString(title as Int)
                 is String -> title as String
@@ -65,16 +64,16 @@ class ToolbarBuilder {
         return toolbar
     }
 
-    fun item(id: Int = 0, setup: ItemBuilder.() -> Unit) {
-        val builder = ItemBuilder()
-        builder.id = id
-        builder.setup()
-        items.add(builder.build())
-    }
+    fun item(id: Int = 0, setup: ItemBuilder.() -> Unit) = ItemBuilder().apply {
+        this.id = id
+        setup()
+    }.build()
 
     fun back(setup: BackBuilder.() -> Unit) {
         back = BackBuilder().apply(setup)
     }
+
+    operator fun Pair<Int, () -> Unit>.unaryPlus() = items.add(this)
 }
 
 @ToolbarDsl
