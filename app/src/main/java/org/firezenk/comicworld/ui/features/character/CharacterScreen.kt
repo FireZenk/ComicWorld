@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.include_toolbar.view.*
 import org.firezenk.comicworld.ComicWorldApp.Companion.component
 import org.firezenk.comicworld.R
 import org.firezenk.comicworld.ui.extensions.dsl
+import org.firezenk.comicworld.ui.extensions.toast
 import org.firezenk.comicworld.ui.features.character.di.CharacterModule
 import org.firezenk.kartographer.annotations.RoutableView
 import javax.inject.Inject
@@ -54,6 +55,9 @@ class CharacterScreen @JvmOverloads constructor(context: Context, attrs: Attribu
                 toolbar.dsl {
                     title = state.name
                 }
+            }
+            is CharacterStates.Error -> {
+                toast(R.string.error)
             }
         }
     }

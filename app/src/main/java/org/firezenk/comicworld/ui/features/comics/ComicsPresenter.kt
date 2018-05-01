@@ -1,5 +1,6 @@
 package org.firezenk.comicworld.ui.features.comics
 
+import arrow.core.getOrDefault
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import org.firezenk.comicworld.ui.features.commons.Presenter
@@ -13,7 +14,7 @@ class ComicsPresenter @Inject constructor(router: Kartographer, private val stat
         when(action) {
             is ComicsActions.LoadComics -> launch(UI) {
                 action.getComics.execute().run {
-                    render(states.success(this))
+                    render(states.success(getOrDefault { emptyList() }))
                 }
             }
         }

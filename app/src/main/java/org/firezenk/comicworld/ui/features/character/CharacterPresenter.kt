@@ -19,8 +19,12 @@ class CharacterPresenter @Inject constructor(router: Kartographer, private val s
     override fun reduce(action: CharacterActions) {
         when (action) {
             is CharacterActions.LoadCharacter -> launch(UI) {
-                val model = action.getCharacter.execute(id)
-                render(states.success(model))
+                val model = action.getCharacter.execute(id).toEither()
+                model.fold({
+                    render(states.error())
+                }, {
+                    render(states.success(it))
+                })
             }
             is CharacterActions.Back -> router.backOnPath { action.block }
         }

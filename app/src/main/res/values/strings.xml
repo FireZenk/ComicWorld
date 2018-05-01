@@ -5,6 +5,7 @@
     <string name="title_notifications">Series</string>
     <string name="toast_home_clicked">Home clicked!</string>
     <string name="no_description">No description\navailable</string>
+    <string name="error">Error</string>
     <string name="menu_refresh">Refresh</string>
     <string name="menu_exit">Exit</string>
 </resources>

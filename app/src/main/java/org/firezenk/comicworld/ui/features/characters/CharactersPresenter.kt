@@ -1,5 +1,6 @@
 package org.firezenk.comicworld.ui.features.characters
 
+import arrow.core.getOrDefault
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import org.firezenk.comicworld.ui.features.characters.di.CharactersModule.Companion.CHARACTERS_ROUTE
@@ -18,7 +19,7 @@ class CharactersPresenter @Inject constructor(router: Kartographer,
         when(action) {
             is CharactersActions.LoadCharacters -> launch(UI) {
                 action.getCharacters.execute().run {
-                    render(states.success(this))
+                    render(states.success(getOrDefault { emptyList() }))
                 }
             }
             is CharactersActions.OpenCharacter -> {

@@ -74,6 +74,15 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
+    def arrowVersion = "0.7.1"
+    compile "io.arrow-kt:arrow-core:$arrowVersion"
+    compile "io.arrow-kt:arrow-syntax:$arrowVersion"
+    compile "io.arrow-kt:arrow-typeclasses:$arrowVersion"
+    compile "io.arrow-kt:arrow-data:$arrowVersion"
+    compile "io.arrow-kt:arrow-instances-core:$arrowVersion"
+    compile "io.arrow-kt:arrow-instances-data:$arrowVersion"
+    kapt    "io.arrow-kt:arrow-annotations-processor:$arrowVersion"
+
     compile "com.karumi:marvelapiclient:0.0.4"
 
     testImplementation 'junit:junit:4.12'

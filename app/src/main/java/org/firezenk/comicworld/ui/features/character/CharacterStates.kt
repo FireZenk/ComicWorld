@@ -8,5 +8,8 @@ open class CharacterStates @Inject constructor() : State() {
 
     fun success(model: CharacterModel) = Loaded(model.name)
 
+    fun error() = Error()
+
     data class Loaded(val name: String): CharacterStates()
+    class Error: CharacterStates()
 }
