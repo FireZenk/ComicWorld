@@ -41,7 +41,7 @@ class ComicsScreen @JvmOverloads constructor(context: Context, attrs: AttributeS
         super.onAttachedToWindow()
         inflate(context, R.layout.screen_comics, this)
 
-        component add ComicsModule(this.parent as ViewGroup) inject this
+        component add ComicsModule(parent as ViewGroup) inject this
 
         lifecycle.addObserver(this)
 

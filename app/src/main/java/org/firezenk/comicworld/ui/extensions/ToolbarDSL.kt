@@ -45,7 +45,7 @@ class ToolbarBuilder {
             toolbar.title = when(title) {
                 is Int -> toolbar.resources.getString(title as Int)
                 is String -> title as String
-                else -> {toolbar.resources.getString(R.string.app_name) }
+                else -> { toolbar.resources.getString(R.string.app_name) }
             }
         }
 

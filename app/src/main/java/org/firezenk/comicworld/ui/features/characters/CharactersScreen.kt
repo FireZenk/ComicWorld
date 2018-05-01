@@ -44,11 +44,31 @@ class CharactersScreen @JvmOverloads constructor(context: Context, attrs: Attrib
 
         inflate(context, R.layout.screen_characters, this)
 
-        component add CharactersModule(this.parent as ViewGroup) inject this
+        component add CharactersModule(parent as ViewGroup) inject this
 
         lifecycle.addObserver(this)
 
         list.adapter = adapter
+
+        val toolbar = getActivity().findViewById(R.id.toolbar) as Toolbar
+        toolbar.dsl {
+            back {
+                action = { presenter reduce actions.back { (context as Activity).onBackPressed() } }
+            }
+            menu = R.menu.menu_characters
+            item {
+                id = R.id.characters_refresh
+                action = {
+
+                }
+            }
+            item {
+                id = R.id.characters_exit
+                action = {
+
+                }
+            }
+        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
