@@ -26,7 +26,7 @@ import javax.inject.Inject
 
 @RoutableView
 class CharactersScreen @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : LinearLayout(context, attrs, defStyleAttr), CharactersView, LifecycleObserver {
+    : LinearLayout(context, attrs, defStyleAttr), CharactersView {
 
     @Inject lateinit var lifecycle: Lifecycle
     @Inject lateinit var presenter: CharactersPresenter

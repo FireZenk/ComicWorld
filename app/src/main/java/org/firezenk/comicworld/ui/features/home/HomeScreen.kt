@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @RoutableView
 class HomeScreen @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : RelativeLayout(context, attrs, defStyleAttr), HomeView, LifecycleObserver {
+    : RelativeLayout(context, attrs, defStyleAttr), HomeView {
 
     @Inject lateinit var lifecycle: Lifecycle
     @Inject lateinit var presenter: HomePresenter
