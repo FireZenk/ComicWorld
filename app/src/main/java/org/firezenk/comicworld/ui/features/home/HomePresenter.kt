@@ -12,13 +12,13 @@ class HomePresenter @Inject constructor(router: Kartographer,
                                         @Named(CHARACTERS_ROUTE) private val charactersRoute: Route,
                                         @Named(COMICS_ROUTE) private val comicsRoute: Route,
                                         private val states: HomeStates)
-    : Presenter<HomeActions, HomeStates, HomeView>(router) {
+    : Presenter<Actions, HomeStates, HomeView>(router) {
 
-    override fun reduce(action: HomeActions) {
+    override fun reduce(action: Actions) {
         when(action) {
-            is HomeActions.GoHome -> router.next(charactersRoute)
-            is HomeActions.GoDashboard -> router.next(comicsRoute)
-            is HomeActions.GoNotifications -> render(states.notifications())
+            is GoHome -> router.next(charactersRoute)
+            is GoDashboard -> router.next(comicsRoute)
+            is GoNotifications -> render(states.notifications())
         }
     }
 }

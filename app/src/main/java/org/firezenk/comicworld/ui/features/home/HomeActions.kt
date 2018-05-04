@@ -11,9 +11,15 @@ open class HomeActions @Inject constructor() : Action() {
 
     fun notifications() = GoNotifications()
 
-    class GoHome : HomeActions()
+    sealed class HomeAction : Action() {
 
-    class GoDashboard : HomeActions()
-
-    class GoNotifications : HomeActions()
+        class GoHome : HomeAction()
+        class GoDashboard : HomeAction()
+        class GoNotifications : HomeAction()
+    }
 }
+
+typealias Actions = HomeActions.HomeAction
+typealias GoHome = HomeActions.HomeAction.GoHome
+typealias GoDashboard = HomeActions.HomeAction.GoDashboard
+typealias GoNotifications = HomeActions.HomeAction.GoNotifications
