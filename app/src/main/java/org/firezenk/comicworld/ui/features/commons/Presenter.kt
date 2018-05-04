@@ -2,11 +2,11 @@ package org.firezenk.comicworld.ui.features.commons
 
 import org.firezenk.kartographer.library.Kartographer
 
-abstract class Presenter<in A : Action, in S : State, in V : Screen<S>>(internal val router: Kartographer) {
+abstract class Presenter<in A : Action, S : State>(internal val router: Kartographer) {
 
-    private lateinit var screen: V
+    private lateinit var screen: Screen<S>
 
-    open infix fun init(screen: V) {
+    open infix fun init(screen: Screen<S>) {
         this.screen = screen
     }
 

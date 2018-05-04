@@ -8,7 +8,7 @@ import org.firezenk.kartographer.library.Kartographer
 import javax.inject.Inject
 
 class CharacterPresenter @Inject constructor(router: Kartographer, private val states: CharacterStates)
-    : Presenter<Actions, CharacterStates, Screen<CharacterStates>>(router) {
+    : Presenter<Actions, CharacterStates>(router) {
 
     private lateinit var id: String
 

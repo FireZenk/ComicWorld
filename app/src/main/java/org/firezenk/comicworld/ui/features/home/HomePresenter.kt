@@ -1,7 +1,6 @@
 package org.firezenk.comicworld.ui.features.home
 
 import org.firezenk.comicworld.ui.features.commons.Presenter
-import org.firezenk.comicworld.ui.features.commons.Screen
 import org.firezenk.comicworld.ui.features.home.di.HomeModule.Companion.CHARACTERS_ROUTE
 import org.firezenk.comicworld.ui.features.home.di.HomeModule.Companion.COMICS_ROUTE
 import org.firezenk.kartographer.library.Kartographer
@@ -13,7 +12,7 @@ class HomePresenter @Inject constructor(router: Kartographer,
                                         @Named(CHARACTERS_ROUTE) private val charactersRoute: Route,
                                         @Named(COMICS_ROUTE) private val comicsRoute: Route,
                                         private val states: HomeStates)
-    : Presenter<Actions, HomeStates, Screen<HomeStates>>(router) {
+    : Presenter<Actions, HomeStates>(router) {
 
     override fun reduce(action: Actions) {
         when(action) {
