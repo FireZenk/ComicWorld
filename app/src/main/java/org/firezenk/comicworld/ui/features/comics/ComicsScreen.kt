@@ -1,7 +1,6 @@
 package org.firezenk.comicworld.ui.features.comics
 
 import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Context
 import android.util.AttributeSet
@@ -15,12 +14,13 @@ import org.firezenk.comicworld.ui.extensions.DSLAdapter
 import org.firezenk.comicworld.ui.extensions.adapterDSL
 import org.firezenk.comicworld.ui.features.comics.di.ComicsModule
 import org.firezenk.comicworld.ui.features.comics.items.ComicItem
+import org.firezenk.comicworld.ui.features.commons.Screen
 import org.firezenk.kartographer.annotations.RoutableView
 import javax.inject.Inject
 
 @RoutableView
 class ComicsScreen @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : LinearLayout(context, attrs, defStyleAttr), ComicsView {
+    : LinearLayout(context, attrs, defStyleAttr), Screen<ComicsStates> {
 
     @Inject lateinit var lifecycle: Lifecycle
     @Inject lateinit var presenter: ComicsPresenter

@@ -2,7 +2,6 @@ package org.firezenk.comicworld.ui.features.home
 
 import android.app.Activity
 import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Context
 import android.support.design.widget.BottomNavigationView
