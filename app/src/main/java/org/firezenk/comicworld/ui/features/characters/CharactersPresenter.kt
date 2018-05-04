@@ -13,20 +13,17 @@ import javax.inject.Named
 class CharactersPresenter @Inject constructor(router: Kartographer,
                                               @Named(CHARACTERS_ROUTE) private val characterRoute: ViewRoute,
                                               private val states: CharactersStates)
-    : Presenter<CharactersActions, CharactersStates, CharactersView>(router) {
+    : Presenter<Actions, CharactersStates, CharactersView>(router) {
 
-    override fun reduce(action: CharactersActions) {
+    override fun reduce(action: Actions) {
         when(action) {
-            is CharactersActions.LoadCharacters -> launch(UI) {
+            is LoadCharacters -> launch(UI) {
                 action.getCharacters.execute().run {
                     render(states.success(getOrDefault { emptyList() }))
                 }
             }
-            is CharactersActions.OpenCharacter -> {
+            is OpenCharacter -> {
                 router.next(characterRoute, mapOf("id" to action.id))
-            }
-            is CharactersActions.Back -> {
-                action.block()
             }
         }
     }

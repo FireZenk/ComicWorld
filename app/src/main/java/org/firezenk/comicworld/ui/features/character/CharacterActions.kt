@@ -4,12 +4,19 @@ import org.firezenk.comicworld.domain.usecases.GetCharacter
 import org.firezenk.comicworld.ui.features.commons.Action
 import javax.inject.Inject
 
-open class CharacterActions @Inject constructor(open val getCharacter: GetCharacter) : Action() {
+class CharacterActions @Inject constructor(private val getCharacter: GetCharacter) : Action() {
 
     fun loadCharacter() = LoadCharacter(getCharacter)
 
-    fun back(block: () -> Unit) = Back(getCharacter, block)
+    fun back(block: () -> Unit) = Back(block)
 
-    class LoadCharacter(override val getCharacter: GetCharacter) : CharacterActions(getCharacter)
-    data class Back(override val getCharacter: GetCharacter, val block: () -> Unit) : CharacterActions(getCharacter)
+    sealed class CharacterAction : Action() {
+
+        class LoadCharacter(val getCharacter: GetCharacter) : CharacterAction()
+        data class Back(val block: () -> Unit) : CharacterAction()
+    }
 }
+
+typealias Actions = CharacterActions.CharacterAction
+typealias LoadCharacter = CharacterActions.CharacterAction.LoadCharacter
+typealias Back = CharacterActions.CharacterAction.Back

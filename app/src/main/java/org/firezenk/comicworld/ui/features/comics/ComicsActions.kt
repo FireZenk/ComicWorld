@@ -4,9 +4,15 @@ import org.firezenk.comicworld.domain.usecases.GetComics
 import org.firezenk.comicworld.ui.features.commons.Action
 import javax.inject.Inject
 
-open class ComicsActions @Inject constructor(open val getComics: GetComics) : Action() {
+class ComicsActions @Inject constructor(private val getComics: GetComics) : Action() {
 
     fun loadComics() = LoadComics(getComics)
 
-    class LoadComics(override val getComics: GetComics) : ComicsActions(getComics)
+    sealed class ComicsAction: Action() {
+
+        class LoadComics(val getComics: GetComics) : ComicsAction()
+    }
 }
+
+typealias Actions = ComicsActions.ComicsAction
+typealias LoadComics = ComicsActions.ComicsAction.LoadComics

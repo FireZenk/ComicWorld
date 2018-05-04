@@ -7,7 +7,7 @@ import org.firezenk.kartographer.library.Kartographer
 import javax.inject.Inject
 
 class CharacterPresenter @Inject constructor(router: Kartographer, private val states: CharacterStates)
-    : Presenter<CharacterActions, CharacterStates, CharacterView>(router) {
+    : Presenter<Actions, CharacterStates, CharacterView>(router) {
 
     private lateinit var id: String
 
@@ -16,9 +16,9 @@ class CharacterPresenter @Inject constructor(router: Kartographer, private val s
         super.init(view)
     }
 
-    override fun reduce(action: CharacterActions) {
+    override fun reduce(action: Actions) {
         when (action) {
-            is CharacterActions.LoadCharacter -> launch(UI) {
+            is LoadCharacter -> launch(UI) {
                 val model = action.getCharacter.execute(id).toEither()
                 model.fold({
                     render(states.error())
@@ -26,7 +26,7 @@ class CharacterPresenter @Inject constructor(router: Kartographer, private val s
                     render(states.success(it))
                 })
             }
-            is CharacterActions.Back -> router.backOnPath { action.block }
+            is Back -> router.backOnPath { action.block }
         }
     }
 }
