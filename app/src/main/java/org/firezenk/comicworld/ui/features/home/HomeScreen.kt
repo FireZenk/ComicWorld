@@ -12,13 +12,14 @@ import kotlinx.android.synthetic.main.screen_home.view.*
 import org.firezenk.comicworld.ComicWorldApp
 import org.firezenk.comicworld.ComicWorldApp.Companion.component
 import org.firezenk.comicworld.R
+import org.firezenk.comicworld.ui.features.commons.Screen
 import org.firezenk.comicworld.ui.features.home.di.HomeModule
 import org.firezenk.kartographer.annotations.RoutableView
 import javax.inject.Inject
 
 @RoutableView
 class HomeScreen @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : RelativeLayout(context, attrs, defStyleAttr), HomeView {
+    : RelativeLayout(context, attrs, defStyleAttr), Screen<HomeStates> {
 
     @Inject lateinit var lifecycle: Lifecycle
     @Inject lateinit var presenter: HomePresenter
