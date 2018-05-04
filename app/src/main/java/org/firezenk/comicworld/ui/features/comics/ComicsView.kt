@@ -1,5 +1,5 @@
 package org.firezenk.comicworld.ui.features.comics
 
-import org.firezenk.comicworld.ui.features.commons.View
+import org.firezenk.comicworld.ui.features.commons.Screen
 
-interface ComicsView : View<ComicsStates>
+interface ComicsView : Screen<ComicsStates>
