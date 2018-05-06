@@ -1,6 +1,7 @@
 package org.firezenk.comicworld.ui.features.home
 
 import android.app.Activity
+import android.app.Application
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Context
@@ -25,7 +26,10 @@ class HomeScreen @JvmOverloads constructor(context: Context, attrs: AttributeSet
     @Inject lateinit var actions: HomeActions
 
     private val act: Activity by lazy {
-        (context as ComicWorldApp).currentLauncher()
+        when (context) {
+            is ComicWorldApp -> context.currentLauncher()
+            else -> context as Activity
+        }
     }
 
     override fun onAttachedToWindow() {

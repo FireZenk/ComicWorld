@@ -10,11 +10,8 @@ import javax.inject.Inject
 class CharacterPresenter @Inject constructor(router: Kartographer, private val states: CharacterStates)
     : Presenter<Actions, CharacterStates>(router) {
 
-    private lateinit var id: String
-
-    override fun init(screen: Screen<CharacterStates>) {
-        id = router.payload<String>("id")!!
-        super.init(screen)
+    private val id: String by lazy {
+        router.payload<String>("id")!!
     }
 
     override fun reduce(action: Actions) {
