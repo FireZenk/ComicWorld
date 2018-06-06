@@ -31,6 +31,12 @@ class BackBuilder {
 }
 
 @ToolbarDsl
+sealed class Title {
+    object Empty: Title()
+    object AppName: Title()
+}
+
+@ToolbarDsl
 class ToolbarBuilder {
 
     lateinit var toolbar: Toolbar
@@ -44,7 +50,9 @@ class ToolbarBuilder {
             toolbar.title = when(title) {
                 is Int -> toolbar.resources.getString(title as Int)
                 is String -> title as String
-                else -> { toolbar.resources.getString(R.string.app_name) }
+                Title.Empty -> ""
+                Title.AppName -> toolbar.resources.getString(R.string.app_name)
+                else -> title.toString()
             }
         }
 
@@ -71,6 +79,14 @@ class ToolbarBuilder {
 
     fun back(setup: BackBuilder.() -> Unit) {
         back = BackBuilder().apply(setup)
+    }
+
+    fun emptyTitle() {
+        this.title = Title.Empty
+    }
+
+    fun appNameTitle() {
+        this.title = Title.AppName
     }
 
     operator fun Pair<Int, () -> Unit>.unaryPlus() = items.add(this)
